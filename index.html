@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text to speech demo</title>
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css'>
+    <link rel='stylesheet' href='assets/css/style.css'>
+</head>
+<body>
+<div class="container_block_sm">
+    <div class="wrap_content_block_sm">
+        <div class="wrap_text_block_sm">
+            <form action="">
+                <div class="form-control">
+                    <label for="text"></label><textarea class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" name="content" id="text" rows="10" cols="50" placeholder="Văn bản cần đọc"></textarea>
+                </div>
+                <div class="form-control">
+                    <label class="block text-gray-600 font-light mb-2">Chọn giọng đọc</label>
+                    <div class="flex">
+                        <div class="flex items-center mb-2 mr-4">
+                            <input type="radio" id="north_male_hieu" value="north_male_hieu" name="voice" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2" checked>
+                            <label for="north_male_hieu" class="text-gray-600">Giọng Nam miền Bắc</label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <input type="radio" id="north_female_lien" value="north_female_lien" name="voice" class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2">
+                            <label for="north_female_lien" class="text-gray-600">Giọng Nữ miền Bắc</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-2" id="play"><i class="fas fa-play"></i> <span>Nghe</span></button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="download"><i class="fas fa-cloud-download-alt"></i> <span>Download</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script type="text/javascript">
+    let socket = null;
+    // We could attach event listener to a header section...
+    document.querySelector(".buttons").addEventListener("click", (e) => {
+        if (e.target.closest("#play") !== null) {
+            //playSound(e);
+            e.preventDefault();
+            const connection = new WrapperWS('play');
+            connection.ident();
+        }
+        if (e.target.closest("#download") !== null) {
+            //downloadSound(e);
+            e.preventDefault();
+            const connection = new WrapperWS('download');
+            connection.ident();
+        }
+    });
+</script>
+</body>
+</html>
